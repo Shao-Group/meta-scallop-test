@@ -32,7 +32,7 @@ draw.roc = function(listfile, texfile)
 		k = k + 1;
 	}
 	
-	legend(xmax * 0.28, ymax, files[,2], col = files[,3], lty = files[,4], lwd = 1, bty='n');
+	legend(xmax * 0.30, ymax, files[,2], col = files[,3], lty = files[,4], lwd = 1, bty='n');
 	
 	dev.off();
 }

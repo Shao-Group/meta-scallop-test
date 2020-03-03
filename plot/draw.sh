@@ -11,5 +11,12 @@ R CMD BATCH egeuv6.R
 ./wrap.sh egeuv6.tex
 pdflatex egeuv6.tex
 
-
 pdflatex combine.tex
+
+exit
+
+cat tex.R | sed 's/AAA/mixed.list/g' | sed 's/BBB/mixed.tex/g' > mixed.R
+R CMD BATCH mixed.R
+./wrap.sh mixed.tex
+pdflatex mixed.tex
+
