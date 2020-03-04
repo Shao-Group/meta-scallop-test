@@ -6,12 +6,26 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage[absolute,overlay]{textpos}
+\usepackage{tikz}
 
 \begin{document}
-\begin{minipage}{0.02\textwidth} {\hspace*{0.2cm}} \end{minipage} 
-\begin{minipage}{0.30\textwidth} {\centering \includegraphics[width=1.0\textwidth]{egeuv6.pdf}} \end{minipage} 
-\begin{minipage}{0.02\textwidth} {\hspace*{0.2cm}} \end{minipage} 
+
+
+\begin{tikzpicture}
+\node at (0.00cm,0cm) {{\scriptsize \bf (a)}};
+\node at (4.05cm,0cm) {{\scriptsize \bf (b)}};
+\node at (8.20cm,0cm) {{\scriptsize \bf (c)}};
+\end{tikzpicture}
+
+\vspace*{-0.48cm}
+
+%\begin{minipage}{0.02\textwidth} {\hspace*{0.2cm}} \end{minipage} 
+%\begin{minipage}{0.30\textwidth} {\centering \includegraphics[width=1.0\textwidth]{egeuv6.pdf}} \end{minipage} 
+%\begin{minipage}{0.02\textwidth} {\hspace*{0.2cm}} \end{minipage} 
+\begin{minipage}{0.01\textwidth} {\hspace*{0.02cm}} \end{minipage} 
 \begin{minipage}{0.30\textwidth} {\centering \includegraphics[width=1.0\textwidth]{gtex.pdf}} \end{minipage}
+\begin{minipage}{0.02\textwidth} {\hspace*{0.2cm}} \end{minipage} 
+\begin{minipage}{0.30\textwidth} {\centering \includegraphics[width=1.0\textwidth]{time.pdf}} \end{minipage} 
 \begin{minipage}{0.02\textwidth} {\hspace*{0.2cm}} \end{minipage} 
 \begin{minipage}{0.30\textwidth} {\centering \includegraphics[width=1.0\textwidth]{mixed.pdf}} \end{minipage} 
 \end{document}
