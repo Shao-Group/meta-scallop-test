@@ -29,7 +29,7 @@ cur=$dir/results/encode10-$1
 mkdir -p $cur
 
 cd $cur
-{ /usr/bin/time -v $meta -i $list -o $cur/meta.gtf -t 40 --merge_threshold 0.3 --max_combined 100 --single_sample_multiple_threading > $cur/meta.log ; } 2> $cur/meta.time
+{ /usr/bin/time -v $meta -i $list -o $cur/meta.gtf -t 40 -c 100 -s 0.3 --single_sample_multiple_threading > $cur/meta.log ; } 2> $cur/meta.time
 
 ln -sf $ref .
 ln -sf $gffcompare .
