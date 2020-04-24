@@ -29,7 +29,9 @@ cur=$dir/results/egeuv6-$1
 mkdir -p $cur
 
 cd $cur
-{ /usr/bin/time -v $meta -i $list -o $cur/meta.gtf -t 60 -b 100 -c 50 -s 0.3  > $cur/meta.log ; } 2> $cur/meta.time
+
+mkdir -p gtf
+{ /usr/bin/time -v $meta -i $list -o $cur/meta.gtf -t 30 -b 100 -c 20 -s 0.3 -d gtf > $cur/meta.log ; } 2> $cur/meta.time
 
 ln -sf $ref .
 ln -sf $gffcompare .
