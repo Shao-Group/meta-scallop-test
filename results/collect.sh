@@ -1,10 +1,13 @@
 #!/bin/bash
 
-while getopts "x:" arg
+while getopts "x:d:" arg
 do
 	case $arg in 
 	x) 
 		suffix=$OPTARG
+		;;
+	d) 
+		subdir=$OPTARG
 		;;
 	esac
 done
@@ -18,13 +21,11 @@ let k=0
 for x in `cat $list`
 do
 	id=`echo $x | cut -f 1 -d ":"`
-	ss=`echo $x | cut -f 2 -d ":"`
-	gm=`echo $x | cut -f 3 -d ":"`
 
-	x0=`cat $results/gtf/$k.stats | grep Query | grep mRNAs | head -n 1 | awk '{print $5}'`
-	x1=`cat $results/gtf/$k.stats | grep Matching | grep intron | grep chain | head -n 1 | awk '{print $4}'`
-	x2=`cat $results/gtf/$k.stats | grep Intron | grep chain | head -n 1 | awk '{print $4}'`
-	x3=`cat $results/gtf/$k.stats | grep Intron | grep chain | head -n 1 | awk '{print $6}'`
+	x0=`cat $results/$subdir/$k.stats | grep Query | grep mRNAs | head -n 1 | awk '{print $5}'`
+	x1=`cat $results/$subdir/$k.stats | grep Matching | grep intron | grep chain | head -n 1 | awk '{print $4}'`
+	x2=`cat $results/$subdir/$k.stats | grep Intron | grep chain | head -n 1 | awk '{print $4}'`
+	x3=`cat $results/$subdir/$k.stats | grep Intron | grep chain | head -n 1 | awk '{print $6}'`
 
 	if [ "$x0" == "" ]; then x0="0"; fi
 	if [ "$x1" == "" ]; then x1="0"; fi

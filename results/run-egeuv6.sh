@@ -30,12 +30,12 @@ mkdir -p $cur
 
 cd $cur
 
-#mkdir -p gtf
-#{ /usr/bin/time -v $meta -i $list -o $cur/meta.gtf -t 30 -b 100 -c 20 -s 0.3 -d gtf > $cur/meta.log ; } 2> $cur/meta.time
-#ln -sf $ref .
-#ln -sf $gffcompare .
-#./gffcompare -M -N -r `basename $ref` meta.gtf
-#gtfcuff roc gffcmp.meta.gtf.tmap 200827 cov > roc
+mkdir -p gtf
+{ /usr/bin/time -v $meta -i $list -o $cur/meta.gtf -t 50 -b 100 -c 20 -s 0.3 -d gtf > $cur/meta.log ; } 2> $cur/meta.time
+ln -sf $ref .
+ln -sf $gffcompare .
+./gffcompare -M -N -r `basename $ref` meta.gtf
+gtfcuff roc gffcmp.meta.gtf.tmap 200827 cov > roc
 
 cd gtf
 rm -rf gff-scripts
@@ -48,4 +48,4 @@ done
 ln -sf $ref .
 ln -sf $gffcompare .
 
-cat gff-scripts | xargs -L 1 -I CMD -P 40 bash -c CMD 1> /dev/null 2> /dev/null &
+cat gff-scripts | xargs -L 1 -I CMD -P 50 bash -c CMD 1> /dev/null 2> /dev/null &
