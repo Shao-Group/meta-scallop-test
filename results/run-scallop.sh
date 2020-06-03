@@ -16,11 +16,11 @@ cd $cur
 bam=$cur/$sid.sorted.bam
 
 samtools sort $cur/$sid.bam > $bam
-
 { /usr/bin/time -v $exe -i $bam -o $sid.gtf --max_num_cigar 100 > $sid.log; } 2> time.log
 
 #ln -sf $ref .
 #ln -sf $gffcompare .
 ./gffcompare -M -N -r `basename $ref` $sid.gtf -o $sid
+./gffcompare -r `basename $ref` $sid.gtf -o $sid.all
 
 cd -

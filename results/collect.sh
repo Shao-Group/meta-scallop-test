@@ -4,34 +4,30 @@ while getopts "x:d:" arg
 do
 	case $arg in 
 	x) 
-		suffix=$OPTARG
+		n=$OPTARG
 		;;
 	d) 
-		subdir=$OPTARG
+		results=$OPTARG
 		;;
 	esac
 done
 
-list=../data/encode10.star.list
-results=encode10-$suffix
-
+extend="all"
+extend="stats"
 echo "#accession #total #correct sensitivity(%) precision(%)"
 
-let k=0
-for x in `cat $list`
+let n=$n-1
+for k in `seq 0 $n`
 do
-	id=`echo $x | cut -f 1 -d ":"`
-
-	x0=`cat $results/$subdir/$k.stats | grep Query | grep mRNAs | head -n 1 | awk '{print $5}'`
-	x1=`cat $results/$subdir/$k.stats | grep Matching | grep intron | grep chain | head -n 1 | awk '{print $4}'`
-	x2=`cat $results/$subdir/$k.stats | grep Intron | grep chain | head -n 1 | awk '{print $4}'`
-	x3=`cat $results/$subdir/$k.stats | grep Intron | grep chain | head -n 1 | awk '{print $6}'`
+	x0=`cat $results/$k.$extend | grep Query | grep mRNAs | head -n 1 | awk '{print $5}'`
+	x1=`cat $results/$k.$extend | grep Matching | grep transcripts | head -n 1 | awk '{print $3}'`
+	x2=`cat $results/$k.$extend | grep Transcript | grep level | head -n 1 | awk '{print $3}'`
+	x3=`cat $results/$k.$extend | grep Transcript | grep level | head -n 1 | awk '{print $5}'`
 
 	if [ "$x0" == "" ]; then x0="0"; fi
 	if [ "$x1" == "" ]; then x1="0"; fi
 	if [ "$x2" == "" ]; then x2="0"; fi
 	if [ "$x3" == "" ]; then x3="0"; fi
 
-	echo "$id $aa $x0 $x1 $x2 $x3"
-	let k=$k+1
+	echo "$k $aa $x0 $x1 $x2 $x3"
 done
