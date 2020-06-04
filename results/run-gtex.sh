@@ -6,7 +6,7 @@ if [ "$#" != "2" ]; then
 fi
 
 dir=/gpfs/group/mxs2589/default/shared/projects/meta-scallop-test
-list=$dir/data/mixed.list1
+list=$dir/data/gtex-all.list
 
 #ref=/gpfs/group/mxs2589/default/shared/data/gencode/GRCh37/gencode.v33lift37.annotation.gtf
 ref=/gpfs/group/mxs2589/default/shared/data/ensembl/release-97/GRCh38/Homo_sapiens.GRCh38.97.gtf
@@ -37,7 +37,7 @@ cd $cur
 mkdir -p gtf
 mkdir -p bam
 cp $list bam.list
-{ /usr/bin/time -v $meta -i bam.list -o $cur/meta.gtf -t $threads -b $samples -c $samples -s 0.3 -m -d gtf > $cur/meta.log ; } 2> $cur/meta.time
+{ /usr/bin/time -v $meta -i bam.list -o $cur/meta.gtf -t $threads -b 100 -c 100 -s 0.3 -m -d gtf > $cur/meta.log ; } 2> $cur/meta.time
 
 let maxid=$samples-1
 
