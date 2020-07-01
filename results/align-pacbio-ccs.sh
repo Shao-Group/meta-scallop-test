@@ -15,7 +15,9 @@ ref=/gpfs/group/mxs2589/default/shared/data/ensembl/human/GRCh38/Homo_sapiens.GR
 
 mkdir -p $cur
 
-{ /usr/bin/time $minimap2 -t $threads -ax splice:hq $ref $fastq 1> $cur/$id.sam 2> $cur/$id.log ; } 2> $cur/$id.time
+#{ /usr/bin/time $minimap2 -t $threads -ax splice:hq $ref $fastq 1> $cur/$id.sam 2> $cur/$id.log ; } 2> $cur/$id.time
 
-#samtools view --threads 20 -S -b $results/$id.sam > $results/$id.bam
-#samtools sort --threads 20 $results/$id.bam -o $results/$id.sorted.bam
+module load gcc/5.3.1
+module load samtools/1.5
+samtools view --threads $threads -S -b $cur/$id.sam > $cur/$id.bam
+samtools sort --threads $threads $cur/$id.bam -o $cur/$id.sorted.bam
