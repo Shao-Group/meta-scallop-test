@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$#" != "6" ]; then
-	echo "usage $0 run-id threads bam-list chrm-list ref-annotation ref-number"
+if [ "$#" != "7" ]; then
+	echo "usage $0 run-id threads bam-list chrm-list cur-dir ref-annotation ref-number"
 	exit
 fi
 
@@ -9,8 +9,9 @@ id=$1
 threads=$2
 list=$3
 chrm=$4
-ref=$5
-refnum=$6
+cur=$5
+ref=$6
+refnum=$7
 
 dir=/gpfs/group/mxs2589/default/shared/projects/aletsch-test
 gffcompare=/gpfs/group/mxs2589/default/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
@@ -18,9 +19,7 @@ gffcompare=/gpfs/group/mxs2589/default/shared/tools/gffcompare/gffcompare-0.11.2
 samples=`cat $list | wc -l`
 let maxid=$samples-1
 
-cur=$dir/results/$id
 mkdir -p $cur
-
 cd $cur
 
 mkdir -p gtf
@@ -28,10 +27,11 @@ rm -rf meta.gtf
 rm -rf gtf/*
 for k in `cat $chrm`
 do
-	cat $cur/$k/meta.gtf >> $cur/meta.gtf
+	kk=`echo $k | cut -c 1-6`
+	cat $cur/$kk/meta.gtf >> $cur/meta.gtf
 	for j in `seq 0 $maxid`
 	do
-		cat $cur/$k/gtf/$j.gtf >> $cur/gtf/$j.gtf
+		cat $cur/$kk/gtf/$j.gtf >> $cur/gtf/$j.gtf
 	done
 done
 
@@ -54,18 +54,18 @@ done
 ln -sf $ref .
 ln -sf $gffcompare .
 
-cat gff-scripts | xargs -L 1 -I CMD -P $threads bash -c CMD 1> /dev/null 2> /dev/null &
+cat gff-scripts | xargs -L 1 -I CMD -P $threads bash -c CMD 1> /dev/null 2> /dev/null 
 cd -
 
-cd bam
-rm -rf bam-scripts
-
-for k in `seq 0 $maxid`
-do
-	echo "$dir/results/run-scallop.sh $cur/bam $k" >> bam-scripts
-done
-
-ln -sf $ref .
-ln -sf $gffcompare .
-
-cat bam-scripts | xargs -L 1 -I CMD -P $threads bash -c CMD 1> /dev/null 2> /dev/null &
+#cd bam
+#rm -rf bam-scripts
+#
+#for k in `seq 0 $maxid`
+#do
+#	echo "$dir/results/run-scallop.sh $cur/bam $k" >> bam-scripts
+#done
+#
+#ln -sf $ref .
+#ln -sf $gffcompare .
+#
+#cat bam-scripts | xargs -L 1 -I CMD -P $threads bash -c CMD 1> /dev/null 2> /dev/null 
