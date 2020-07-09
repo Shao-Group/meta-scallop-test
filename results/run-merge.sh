@@ -27,7 +27,8 @@ rm -rf meta.gtf
 rm -rf gtf/*
 for k in `cat $chrm`
 do
-	kk=`echo $k | cut -c 1-6`
+#kk=`echo $k | cut -c 1-6`
+	kk=$k
 	cat $cur/$kk/meta.gtf >> $cur/meta.gtf
 	for j in `seq 0 $maxid`
 	do
