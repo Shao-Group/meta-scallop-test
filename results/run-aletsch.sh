@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$#" != "1" ]; then
-	echo "usage $0 run-id"
+if [ "$#" != "4" ]; then
+	echo "usage $0 run-id threads bam-list chrm-list"
 	exit
 fi
 
@@ -45,26 +45,30 @@ cp $metadir/build/aletsch $meta
 cur=$dir/results/$1
 mkdir -p $cur
 
+meta=$cur/aletsch-$mid
+cp $metadir/build/aletsch $meta
+
 cd $cur
 
 mkdir -p gtf
 mkdir -p bam
+mkdir -p pro
 cp $list bam.list
 { /usr/bin/time -v $meta -i bam.list -o $cur/meta.gtf -t $threads -d gtf > $cur/meta.log ; } 2> $cur/meta.time
 
-let num=$n-1
+refnum=200827
+#refnum=199669
 
 ln -sf $ref .
 ln -sf $gffcompare .
 ./gffcompare -M -N -r `basename $ref` meta.gtf
 gtfcuff roc gffcmp.meta.gtf.tmap $numref cov > roc
-
 ./gffcompare -r `basename $ref` meta.gtf -o gffall
 
 cd gtf
 rm -rf gff-scripts
 
-for k in `seq 0 $num`
+for k in `seq 0 $maxid`
 do
 	echo "./gffcompare -M -N -r `basename $ref` -o $k $k.gtf" >> gff-scripts
 	echo "./gffcompare -r `basename $ref` -o $k.all $k.gtf" >> gff-scripts
@@ -79,7 +83,7 @@ cd -
 cd bam
 rm -rf bam-scripts
 
-for k in `seq 0 $num`
+for k in `seq 0 $maxid`
 do
 	echo "$dir/results/run-scallop.sh $cur/bam $k" >> bam-scripts
 done
