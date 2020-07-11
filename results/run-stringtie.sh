@@ -5,7 +5,7 @@ if [ "$#" != "3" ]; then
 	exit
 fi
 
-exe=/home/mxs2589/shao/project/aletsch-test/programs/scallop-0.10.5
+exe=/home/mxs2589/shared/tools/stringtie/stringtie
 ref=/home/mxs2589/shared/data/ensembl/release-97/GRCh38/Homo_sapiens.GRCh38.97.gtf
 gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
 cur=$1
@@ -15,7 +15,7 @@ sid=$3
 mkdir -p $cur
 cd $cur
 
-{ /usr/bin/time -v $exe -i $bam -o $sid.gtf > $sid.log; } 2> $sid.time
+{ /usr/bin/time -v $exe $bam -o $sid.gtf > $sid.log; } 2> $sid.time
 
 ln -sf $gffcompare .
 ln -sf $ref .
