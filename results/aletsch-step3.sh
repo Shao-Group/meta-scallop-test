@@ -18,7 +18,6 @@ refnum=$9
 # step 1: generate profiles
 $rdir/aletsch-profile.sh shao $threads $list $cur pro $meta
 
-
 # step 2: assemble individual chrms
 rm -rf $cur/chrs.jobs
 for k in `cat $chrs`
