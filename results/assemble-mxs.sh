@@ -45,7 +45,7 @@ rm -rf $cur/chrs.jobs
 for k in `cat $chrs`
 do
 	id=`echo $k | cut -c 1-6`
-	echo "$dir/results/run-chrm.sh $1 $threads $list $k $cur/pro $cur/$id $meta" >> $cur/chrs.jobs
+	echo "$dir/results/run-chrm.sh $1 $threads $list $k $cur/pro $cur/$id $meta $ref $refnum" >> $cur/chrs.jobs
 done
 cat $cur/chrs.jobs | xargs -L 1 -P $numjobs -I CMD bash -c CMD
 
