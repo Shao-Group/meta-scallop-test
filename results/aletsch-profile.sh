@@ -12,7 +12,7 @@ cur=$4
 pro=$5
 meta=$6
 
-mkdir -p $cur
+mkdir -p $cur/$pro
 cd $cur
 
 cp $list bam.list

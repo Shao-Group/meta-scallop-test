@@ -13,9 +13,8 @@ cur=$5
 ref=$6
 refnum=$7
 
-dir=/gpfs/group/mxs2589/default/shared/projects/aletsch-test
-gffcompare=/gpfs/group/mxs2589/default/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
-gtfcuff=
+gtfcuff=/home/mxs2589/shared/bin/gtfcuff
+gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompar
 
 samples=`cat $list | wc -l`
 let maxid=$samples-1
