@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$#" != "7" ]; then
-	echo "usage $0 run-id threads bam-list chrm pro-dir cur-dir exe"
+if [ "$#" != "9" ]; then
+	echo "usage $0 run-id threads bam-list chrm pro-dir cur-dir exe ref refnum"
 	exit
 fi
 
@@ -12,10 +12,13 @@ chrm=$4
 pro=$5
 cur=$6
 meta=$7
+ref=$8
+refnum=$9
 
+gtfcuff=/home/mxs2589/shared/bin/gtfcuff
 gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
-ref=/home/mxs2589/shared/data/ensembl/release-97/GRCh38/Homo_sapiens.GRCh38.97.gtf
-numref=199669
+#ref=/home/mxs2589/shared/data/ensembl/release-97/GRCh38/Homo_sapiens.GRCh38.97.gtf
+#numref=199669
 
 mkdir -p $cur
 cd $cur
@@ -29,7 +32,7 @@ cp $list bam.list
 ln -sf $ref .
 ln -sf $gffcompare .
 ./gffcompare -M -N -r `basename $ref` meta.gtf
-gtfcuff roc gffcmp.meta.gtf.tmap $numref cov > roc
+$gtfcuff roc gffcmp.meta.gtf.tmap $numref cov > roc
 ./gffcompare -r `basename $ref` meta.gtf -o gffall
 
 cd gtf

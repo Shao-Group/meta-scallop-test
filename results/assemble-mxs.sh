@@ -9,7 +9,7 @@ dir=/home/mxs2589/shao/project/aletsch-test
 gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
 metadir=/home/mxs2589/shao/project/aletsch
 
-list=$dir/data/sra-100-hisat-ref.list
+list=$dir/data/sra-100-star-ref.list
 chrs=$dir/data/sra-chr.list
 
 ref=/home/mxs2589/shared/data/ensembl/release-97/GRCh38/Homo_sapiens.GRCh38.97.gtf
