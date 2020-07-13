@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" != "7" ]; then
-	echo "usage $0 run-id threads bam-list chrm-list cur-dir ref-annotation ref-number"
+	echo "usage $0 run-id threads bam-list chrm-list cur-dir ref ref-number"
 	exit
 fi
 
@@ -13,8 +13,8 @@ cur=$5
 ref=$6
 refnum=$7
 
-dir=/gpfs/group/mxs2589/default/shared/projects/aletsch-test
-gffcompare=/gpfs/group/mxs2589/default/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
+gtfcuff=/home/mxs2589/shared/bin/gtfcuff
+gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompar
 
 samples=`cat $list | wc -l`
 let maxid=$samples-1
@@ -27,8 +27,7 @@ rm -rf meta.gtf
 rm -rf gtf/*
 for k in `cat $chrm`
 do
-#kk=`echo $k | cut -c 1-6`
-	kk=$k
+	kk=`echo $k | cut -c 1-6`
 	cat $cur/$kk/meta.gtf >> $cur/meta.gtf
 	for j in `seq 0 $maxid`
 	do
@@ -39,8 +38,7 @@ done
 ln -sf $ref .
 ln -sf $gffcompare .
 ./gffcompare -M -N -r `basename $ref` meta.gtf
-gtfcuff roc gffcmp.meta.gtf.tmap $refnum cov > roc
-
+$gtfcuff roc gffcmp.meta.gtf.tmap $refnum cov > roc
 ./gffcompare -r `basename $ref` meta.gtf -o gffall
 
 cd gtf
