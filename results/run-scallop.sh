@@ -5,9 +5,14 @@ if [ "$#" != "3" ]; then
 	exit
 fi
 
-exe=/home/mxs2589/shao/project/aletsch-test/programs/scallop-0.10.5
-ref=/home/mxs2589/shared/data/ensembl/release-97/GRCh38/Homo_sapiens.GRCh38.97.gtf
-gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
+#exe=/home/mxs2589/shao/project/aletsch-test/programs/scallop-0.10.5
+#ref=/home/mxs2589/shared/data/ensembl/release-97/GRCh38/Homo_sapiens.GRCh38.97.gtf
+#gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
+#ref=/gpfs/group/mxs2589/default/shared/data/ensembl/release-97/GRCh38/Homo_sapiens.GRCh38.97.gtf
+exe=/storage/home/mxs2589/shao/projects/scallop/release/scallop-0.10.5/src/scallop
+ref=/storage/home/mxs2589/shared/data/gencode/GRCh38/gencode.v33.annotation.gtf
+gffcompare=/gpfs/group/mxs2589/default/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
+
 cur=$1
 bam=$2
 sid=$3

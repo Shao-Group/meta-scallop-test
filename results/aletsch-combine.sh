@@ -13,8 +13,10 @@ cur=$5
 ref=$6
 refnum=$7
 
-gtfcuff=/home/mxs2589/shared/bin/gtfcuff
-gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompar
+#gtfcuff=/home/mxs2589/shared/bin/gtfcuff
+#gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
+gtfcuff=/storage/home/mxs2589/shared/bin/gtfcuff
+gffcompare=/storage/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
 
 samples=`cat $list | wc -l`
 let maxid=$samples-1
