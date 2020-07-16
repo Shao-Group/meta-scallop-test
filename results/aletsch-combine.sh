@@ -23,18 +23,18 @@ let maxid=$samples-1
 mkdir -p $cur
 cd $cur
 
-#mkdir -p gtf
-#rm -rf meta.gtf
-#rm -rf gtf/*
-#for k in `cat $chrm`
-#do
-#	kk=`echo $k | cut -c 1-6`
-#	cat $cur/$kk/meta.gtf >> $cur/meta.gtf
-#	for j in `seq 0 $maxid`
-#	do
-#		cat $cur/$kk/gtf/$j.gtf >> $cur/gtf/$j.gtf
-#	done
-#done
+mkdir -p gtf
+rm -rf meta.gtf
+rm -rf gtf/*
+for k in `cat $chrm`
+do
+	kk=`echo $k | cut -c 1-6`
+	cat $cur/$kk/meta.gtf >> $cur/meta.gtf
+	for j in `seq 0 $maxid`
+	do
+		cat $cur/$kk/gtf/$j.gtf >> $cur/gtf/$j.gtf
+	done
+done
 
 ln -sf $ref .
 ln -sf $gffcompare .
