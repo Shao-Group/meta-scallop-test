@@ -20,24 +20,24 @@ done
 for x in `seq 0 $num`
 do
 	id=$x
-	gff1=$results1/$id.stats
-	map1=$results1/$id.$id.gtf.tmap
+	gff1=$results1/$id.all
+	map1=$results1/$id.all.$id.gtf.tmap
 
 	inf1=`cat $gff1 | grep Query | grep mRNAs | head -n 1 | awk '{print $5}'`
-	ref1=`cat $gff1 | grep Reference | grep mRNA | awk '{print $9}' | cut -f 2 -d "("`
-	cor1=`cat $gff1 | grep Matching | grep intron | grep chain | head -n 1 | awk '{print $4}'`
+	ref1=`cat $gff1 | grep Reference | grep mRNA | head -n 1 | awk '{print $5}'`
+	cor1=`cat $gff1 | grep Matching | grep transcripts | head -n 1 | awk '{print $3}'`
 
 	sen1=`echo "scale = 2; 100 * $cor1 / $ref1" | bc`
 	pre1=`echo "scale = 2; 100 * $cor1 / $inf1" | bc`
 
 
 #let id=$id+50
-	gff2=$results2/$id.stats
-	map2=$results2/$id.$id.gtf.tmap
+	gff2=$results2/$id.all
+	map2=$results2/$id.all.$id.gtf.tmap
 
 	inf2=`cat $gff2 | grep Query | grep mRNAs | head -n 1 | awk '{print $5}'`
-	ref2=`cat $gff2 | grep Reference | grep mRNA | awk '{print $9}' | cut -f 2 -d "("`
-	cor2=`cat $gff2 | grep Matching | grep intron | grep chain | head -n 1 | awk '{print $4}'`
+	ref2=`cat $gff2 | grep Reference | grep mRNA | head -n 1 | awk '{print $5}'`
+	cor2=`cat $gff2 | grep Matching | grep transcripts | head -n 1 | awk '{print $3}'`
 
 	sen2=`echo "scale = 2; 100 * $cor2 / $ref2" | bc`
 	pre2=`echo "scale = 2; 100 * $cor2 / $inf2" | bc`

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$#" != "7" ]; then
-	echo "usage $0 run-id threads bam-list chrm-list cur-dir ref ref-number"
+if [ "$#" != "6" ]; then
+	echo "usage $0 run-id threads bam-list chrm-list cur-dir ref"
 	exit
 fi
 
@@ -11,7 +11,6 @@ list=$3
 chrm=$4
 cur=$5
 ref=$6
-refnum=$7
 
 #gtfcuff=/home/mxs2589/shared/bin/gtfcuff
 #gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
@@ -24,24 +23,29 @@ let maxid=$samples-1
 mkdir -p $cur
 cd $cur
 
-mkdir -p gtf
-rm -rf meta.gtf
-rm -rf gtf/*
-for k in `cat $chrm`
-do
-	kk=`echo $k | cut -c 1-6`
-	cat $cur/$kk/meta.gtf >> $cur/meta.gtf
-	for j in `seq 0 $maxid`
-	do
-		cat $cur/$kk/gtf/$j.gtf >> $cur/gtf/$j.gtf
-	done
-done
+#mkdir -p gtf
+#rm -rf meta.gtf
+#rm -rf gtf/*
+#for k in `cat $chrm`
+#do
+#	kk=`echo $k | cut -c 1-6`
+#	cat $cur/$kk/meta.gtf >> $cur/meta.gtf
+#	for j in `seq 0 $maxid`
+#	do
+#		cat $cur/$kk/gtf/$j.gtf >> $cur/gtf/$j.gtf
+#	done
+#done
 
 ln -sf $ref .
 ln -sf $gffcompare .
 ./gffcompare -M -N -r `basename $ref` meta.gtf
-$gtfcuff roc gffcmp.meta.gtf.tmap $refnum cov > roc
 ./gffcompare -r `basename $ref` meta.gtf -o gffall
+
+refnum1=`cat gffcmp.stats | grep Reference | grep mRNA | head -n 1 | awk '{print $5}'`
+refnum2=`cat gffall.stats | grep Reference | grep mRNA | head -n 1 | awk '{print $5}'`
+
+$gtfcuff roc gffcmp.meta.gtf.tmap $refnum1 cov > roc.mul
+$gtfcuff roc gffall.meta.gtf.tmap $refnum2 cov > roc.all
 
 cd gtf
 rm -rf gff-scripts

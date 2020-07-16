@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$#" != "9" ]; then
-	echo "usage $0 run-id threads bam-list chrm pro-dir cur-dir exe ref refnum"
+if [ "$#" != "8" ]; then
+	echo "usage $0 run-id threads bam-list chrm pro-dir cur-dir exe ref"
 	exit
 fi
 
@@ -13,10 +13,13 @@ pro=$5
 cur=$6
 meta=$7
 ref=$8
-refnum=$9
 
-gtfcuff=/home/mxs2589/shared/bin/gtfcuff
-gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
+gtfcuff=/storage/home/mxs2589/shared/bin/gtfcuff
+gffcompare=/storage/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
+
+#gtfcuff=/home/mxs2589/shared/bin/gtfcuff
+#gffcompare=/home/mxs2589/shared/tools/gffcompare/gffcompare-0.11.2.Linux_x86_64/gffcompare
+
 #ref=/home/mxs2589/shared/data/ensembl/release-97/GRCh38/Homo_sapiens.GRCh38.97.gtf
 #numref=199669
 
@@ -35,8 +38,13 @@ cp $list bam.list
 ln -sf $ref .
 ln -sf $gffcompare .
 ./gffcompare -M -N -r `basename $ref` meta.gtf
-$gtfcuff roc gffcmp.meta.gtf.tmap $refnum cov > roc
 ./gffcompare -r `basename $ref` meta.gtf -o gffall
+
+refnum1=`cat gffcmp.stats | grep Reference | grep mRNA | head -n 1 | awk '{print $5}'`
+refnum2=`cat gffall.stats | grep Reference | grep mRNA | head -n 1 | awk '{print $5}'`
+
+$gtfcuff roc gffcmp.meta.gtf.tmap $refnum1 cov > roc.mul
+$gtfcuff roc gffall.meta.gtf.tmap $refnum2 cov > roc.all
 
 cd gtf
 rm -rf gff-scripts

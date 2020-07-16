@@ -25,4 +25,4 @@ mid=`git log | grep commit | head -n 1 | cut -f 2 -d " " | cut -c 1-6`
 cp $metadir/build/aletsch $meta
 cd -
 
-$rdir/aletsch-step3.sh $rdir $threads $numjobs $list $chrs $cur $meta $ref $refnum
+$rdir/aletsch-step3.sh $rdir $threads $numjobs $list $chrs $cur $meta $ref

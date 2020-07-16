@@ -14,7 +14,6 @@ list=$dir/data/sra-100-hisat-ref.list
 chrs=$dir/data/sra-chr.list
 
 ref=/home/mxs2589/shared/data/ensembl/release-97/GRCh38/Homo_sapiens.GRCh38.97.gtf
-refnum=199669
 
 threads=4
 numjobs=5
@@ -35,7 +34,7 @@ do
 	let aa=$kk*10
 	cat $list | head -n $aa | tail -n 10 > $cdir/list
 
-	echo "$rdir/aletsch-step3.sh $rdir $threads $numjobs $cdir/list $chrs $cdir $meta $ref $refnum" >> $scripts
+	echo "$rdir/aletsch-step3.sh $rdir $threads $numjobs $cdir/list $chrs $cdir $meta $ref" >> $scripts
 done
 
 cat $scripts | xargs -L 1 -P 10 -I CMD bash -c CMD
