@@ -42,7 +42,7 @@ do
 	sen2=`echo "scale = 2; 100 * $cor2 / $ref2" | bc`
 	pre2=`echo "scale = 2; 100 * $cor2 / $inf2" | bc`
 
-#echo $id $inf1 $ref1 $cor1 $sen1 $pre1 $inf2 $ref2 $cor2 $sen2 $pre2
+#echo "AAAAAAAA $id $inf1 $ref1 $cor1 $sen1 $pre1 $inf2 $ref2 $cor2 $sen2 $pre2 AAAAAAAAA"
 
 	m1=""
 	if [ "$cor1" -gt "$cor2" ]; then

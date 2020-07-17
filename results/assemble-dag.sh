@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #id="sra-hisat-ref-A02"
-id="gtex500-A12"
-list=/gpfs/group/mxs2589/default/qqz5133/gtex/meta-scallop/bamlist/500.txt
+id="gtex20-A20"
+list=/gpfs/group/mxs2589/default/qqz5133/gtex/meta-scallop/bamlist/20.txt
 chrm=/gpfs/group/mxs2589/default/qqz5133/gtex/meta-scallop/bamlist/chr.list
 
 cores="20"
