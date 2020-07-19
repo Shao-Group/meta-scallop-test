@@ -2,7 +2,7 @@ draw.roc = function(listfile, texfile)
 {
 #pdf(pdffile, width = 5, height = 5);
 	library(tikzDevice);
-	tikz(texfile, width = 2.8, height = 2.8); #0.4 * n
+	tikz(texfile, width = 4.0, height = 4.0); #0.4 * n
 
 	files = read.table(listfile);
 	
@@ -39,12 +39,3 @@ draw.roc = function(listfile, texfile)
 
 draw.roc("AAA", "BBB");
 q();
-
-draw.roc("egeuv6.100.list", "egeuv6.100.pdf");
-draw.roc("compare.list", "compare.pdf");
-draw.roc("egeuv6.100.list", "egeuv6.100.pdf");
-draw.roc("roc-10.list", "roc-10.pdf");
-draw.roc("roc-50.list", "roc-50.pdf");
-draw.roc("roc-100.list", "roc-100.pdf");
-draw.roc("roc-all.list", "roc-all.pdf");
-draw.roc("graphmerge.list", "graphmerge.pdf");

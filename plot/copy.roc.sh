@@ -1,5 +1,15 @@
 #!/bin/bash
 
+cur=gtex
+mkdir -p $cur
+
+cp ../results/gtex20-A21/roc.all $cur/gtex20-aletsch-roc.all
+cp ../results/gtex100-A21/roc.all $cur/gtex100-aletsch-roc.all
+cp ../results/gtex500-A21/roc.all $cur/gtex500-aletsch-roc.all
+cp ../results/gtex2377-A21/roc.all $cur/gtex2377-aletsch-roc.all
+
+exit
+
 # copy smartseq2 
 cur=`pwd`/smartseq2.roc
 mkdir -p $cur
