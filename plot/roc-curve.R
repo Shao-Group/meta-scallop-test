@@ -23,12 +23,14 @@ draw.roc = function(listfile, texfile)
 	
 	par(mar=c(2.6,2.6,0.1,0.1));
 	par(mgp=c(1.6, 0.5, 0));
-	plot(0, 0, xlim = c(xmin, xmax), ylim = c(ymin, ymax), xlab = "Precision", ylab = "Sensitivity");
+	plot(-100, -100, xlim = c(xmin, xmax), ylim = c(ymin, ymax), xlab = "Precision", ylab = "Sensitivity");
+	grid();
 	k = 1;
 	for (file in files[,1])
 	{
 		data = read.table(file);
-		lines(data[, 16], data[, 13] / 1.000, col = files[k, 3], lty = files[k, 4], lwd = 1); 
+		points(data[1, 16], data[1, 13] / 1.000, col = files[k, 3], pch = 16, cex = 0.5); 
+		lines(data[, 16], data[, 13] / 1.000, col = files[k, 3], lty = files[k, 4], lwd = 0.75); 
 		k = k + 1;
 	}
 	
@@ -36,6 +38,3 @@ draw.roc = function(listfile, texfile)
 	
 	dev.off();
 }
-
-draw.roc("AAA", "BBB");
-q();
